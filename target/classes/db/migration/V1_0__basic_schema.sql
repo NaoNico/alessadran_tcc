@@ -29,7 +29,7 @@ CREATE TABLE `orders` (
    `user_id` int NOT NULL,
    `status` varchar(20) NOT NULL,
    PRIMARY KEY (`id`),
-   FOREIGN KEY (`user_id`) REFERENCES User(`id`)
+   FOREIGN KEY (`user_id`) REFERENCES user(`id`)
 );
 
 CREATE TABLE `productorder` (
@@ -39,6 +39,6 @@ CREATE TABLE `productorder` (
    `price` float NOT NULL,
    `quant` int NOT NULL,
    PRIMARY KEY (`id`),
-   FOREIGN KEY (`product_id`) REFERENCES Product(`id`)
+   FOREIGN KEY (`product_id`) REFERENCES product(`id`)
 );
 
