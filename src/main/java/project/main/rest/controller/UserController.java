@@ -27,7 +27,7 @@ public class UserController {
 		}		
 	}
 	
-	@RequestMapping(path = "/users/username={username}&password={password}/facebook", method = RequestMethod.GET)
+	@RequestMapping(path = "/users/username={username}&password={password}/facebook", method = RequestMethod.POST)
 	ResponseEntity<?> findUserByNameAndPasswordOrCreate(@PathVariable String username, @PathVariable String password) {
 		User user = repository.findByUserAndPassword(username, password);
 		if (user == null) {
