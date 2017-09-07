@@ -1,5 +1,6 @@
 package project.main.rest.controller;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import project.main.entity.Orders;
 import project.main.entity.Product;
 import project.main.entity.ProductOrder;
+import project.main.pojo.OrderPojo;
 import project.main.repository.OrderRepository;
 import project.main.repository.ProductOrderRepository;
 import project.main.repository.ProductRepository;
@@ -77,5 +79,21 @@ public class OrderController {
 		
 		orderRepository.save(order);
 		return new ResponseEntity<String>("changed with success", HttpStatus.OK);
+	}
+	
+	@RequestMapping(path = "/orderbyuser/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	ResponseEntity<?> orderByUser(@PathVariable Integer id){
+		System.out.println("estou aq");
+		Orders[] orders = orderRepository.orderByUser(id);
+		ArrayList<OrderPojo> orderPojo = new ArrayList<OrderPojo>();
+		for (Orders order : orders) {
+			OrderPojo orderPojo2 = new OrderPojo();
+			orderPojo2.id = order.getId();
+			orderPojo2.price = order.getPrice();
+			orderPojo2.status = order.getStatus();
+			orderPojo.add(orderPojo2);
+		}
+		return new ResponseEntity<ArrayList<OrderPojo>>(orderPojo, HttpStatus.OK);
 	}
 }
