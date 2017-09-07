@@ -1,5 +1,7 @@
 package project.main.rest.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import project.main.entity.Product;
+import project.main.pojo.CategoriaPojo;
 import project.main.repository.ProductRepository;
 
 @RestController
@@ -63,9 +66,25 @@ public class ProductController {
 	@RequestMapping(path = "/products/menu", method = RequestMethod.GET)
 	@ResponseBody
 	ResponseEntity<?> productsOnMenuWithoutCategoria(){
-		Product[] product;
-		product = repository.productsOnMenuWithoutCategoria();
-		return new ResponseEntity<Product[]>(product, HttpStatus.OK);
+		Product[] products;	
+		ArrayList<CategoriaPojo> categorias = new ArrayList<CategoriaPojo> ();
+		products = repository.productsOnMenuWithoutCategoria();
+		String newCategoria = "";
+		CategoriaPojo categoria = null;
+		for (Product product : products) {
+			System.out.println(newCategoria+  "," + product.getCategoria());
+			if (!newCategoria.equals(product.getCategoria())){
+				newCategoria = product.getCategoria();
+				categoria = new CategoriaPojo();
+				categoria.nome = newCategoria;
+				categorias.add(categoria);
+				categoria.products.add(product);
+			} else {
+				categoria.products.add(product);
+			}
+			
+		}
+		return new ResponseEntity<ArrayList<CategoriaPojo>>(categorias, HttpStatus.OK);
 	}
 }
 	
