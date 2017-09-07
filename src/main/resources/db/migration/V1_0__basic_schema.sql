@@ -38,6 +38,7 @@ CREATE TABLE `productorder` (
    `order_id` int NOT NULL,
    `price` float NOT NULL,
    `quant` int NOT NULL,
+   `name` varchar(60) NOT NULL,
    PRIMARY KEY (`id`),
    FOREIGN KEY (`product_id`) REFERENCES product(`id`)
 );

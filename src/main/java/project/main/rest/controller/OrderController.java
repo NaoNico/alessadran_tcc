@@ -59,6 +59,7 @@ public class OrderController {
 		    productOrder.setOrder(order);
 		    productOrder.setPrice((float) slaidNode.get("price").asDouble());
 		    productOrder.setQuant(slaidNode.get("quant").asInt());
+		    productOrder.setName(slaidNode.get("name").asText());
 		    productOrder.setProduct(productRepository.findOne(slaidNode.get("product_id").asInt()));
 		    productOrderRepository.save(productOrder);
 		}

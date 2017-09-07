@@ -27,6 +27,10 @@ public class ProductOrder implements Serializable{
 	@NotNull
 	private Integer quant;
 	
+	@Column(name = "name")
+	@NotNull
+	private String name;
+	
 	@Column(name = "price")
 	@NotNull
 	private Float price;
@@ -78,4 +82,13 @@ public class ProductOrder implements Serializable{
 	public void setOrder(Orders orders) {
 		this.orders = orders;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }
