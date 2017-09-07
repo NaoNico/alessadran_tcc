@@ -13,4 +13,8 @@ public interface ProductRepository extends CrudRepository<Product, Integer>{
 	@Query(value = "SELECT * FROM PRODUCT WHERE menu = 1 and datevalidate > CURDATE() and categoria = ?1 group by categoria"
 			, nativeQuery = true)
 	Product[] productsOnMenu(String categoria);
+	
+	@Query(value = "SELECT * FROM PRODUCT WHERE menu = 1 and datevalidate > CURDATE() group by categoria"
+	, nativeQuery = true)
+	Product[] productsOnMenuWithoutCategoria();
 }
