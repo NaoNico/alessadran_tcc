@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.endpoint.AutoConfigurationReportEndpoint.Report;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ import project.main.repository.ProductRepository;
 import project.main.repository.UserRepository;
 
 @RestController
+@CrossOrigin(maxAge = 3600)
 public class OrderController {
 	
 	@Autowired
@@ -48,6 +50,7 @@ public class OrderController {
 		Orders order = new Orders();
 		order.setPrice((float) field.get("price").asDouble());
 		order.setStatus(field.get("status").asText());
+		order.setDate(field.get("date").asText());
 		order.setUser(userRepository.findOne(field.get("user_id").asInt()));
 		order = orderRepository.save(order);
 		
@@ -93,6 +96,7 @@ public class OrderController {
 			orderPojo2.id = order.getId();
 			orderPojo2.price = order.getPrice();
 			orderPojo2.status = order.getStatus();
+			orderPojo2.date = order.getDate();
 			orderPojo.add(orderPojo2);
 		}
 		return new ResponseEntity<ArrayList<OrderPojo>>(orderPojo, HttpStatus.OK);

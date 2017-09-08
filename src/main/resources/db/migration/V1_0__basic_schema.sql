@@ -27,6 +27,7 @@ CREATE TABLE `orders` (
    `id` int NOT NULL AUTO_INCREMENT,
    `price` float NOT NULL,
    `user_id` int NOT NULL,
+   `date` DATE NOT NULL,
    `status` varchar(20) NOT NULL,
    PRIMARY KEY (`id`),
    FOREIGN KEY (`user_id`) REFERENCES user(`id`)

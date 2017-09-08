@@ -1,6 +1,10 @@
 package project.main.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +47,10 @@ public class Orders implements Serializable {
 	@OneToMany(mappedBy = "orders")
     private List<ProductOrder> productOrderList = new ArrayList<ProductOrder>();
 	
+	@Column(name = "date")
+	@NotNull
+	private String date;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -82,5 +90,13 @@ public class Orders implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 }
