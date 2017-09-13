@@ -23,6 +23,7 @@ import project.main.entity.Orders;
 import project.main.entity.Product;
 import project.main.entity.ProductOrder;
 import project.main.pojo.OrderPojo;
+import project.main.pojo.ProductOrderPojo;
 import project.main.repository.OrderRepository;
 import project.main.repository.ProductOrderRepository;
 import project.main.repository.ProductRepository;
@@ -100,5 +101,20 @@ public class OrderController {
 			orderPojo.add(orderPojo2);
 		}
 		return new ResponseEntity<ArrayList<OrderPojo>>(orderPojo, HttpStatus.OK);
+	}
+
+	@RequestMapping(path = "/productsbyorder/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	ResponseEntity<?> productsByOrder(@PathVariable Integer id){
+		ProductOrder[] orders = productOrderRepository.productsByOrder(id);
+		ArrayList<ProductOrderPojo> productsOrderPojo = new ArrayList<ProductOrderPojo>();
+		for (ProductOrder productOrder : orders) {
+			ProductOrderPojo productOrderPojo = new ProductOrderPojo();
+			productOrderPojo.name = productOrder.getName();
+			productOrderPojo.price = productOrder.getPrice();
+			productOrderPojo.quant = productOrder.getQuant();
+			productsOrderPojo.add(productOrderPojo);
+		}
+		return new ResponseEntity<ArrayList<ProductOrderPojo>>(productsOrderPojo, HttpStatus.OK);
 	}
 }
