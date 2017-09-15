@@ -117,4 +117,21 @@ public class OrderController {
 		}
 		return new ResponseEntity<ArrayList<ProductOrderPojo>>(productsOrderPojo, HttpStatus.OK);
 	}
+	
+	@RequestMapping(path = "/allorders", method = RequestMethod.GET)
+	@ResponseBody
+	ResponseEntity<?> orders(){
+		Iterable<Orders> orders = orderRepository.findAll();
+		ArrayList<OrderPojo> orderPojo = new ArrayList<OrderPojo>();
+		for (Orders order : orders) {
+			OrderPojo orderPojo2 = new OrderPojo();
+			orderPojo2.id = order.getId();
+			orderPojo2.price = order.getPrice();
+			orderPojo2.status = order.getStatus();
+			orderPojo2.date = order.getDate();
+			orderPojo2.userName = order.getUser().getUsername();
+			orderPojo.add(orderPojo2);
+		}
+		return new ResponseEntity<ArrayList<OrderPojo>>(orderPojo, HttpStatus.OK);
+	}
 }

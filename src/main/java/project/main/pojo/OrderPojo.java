@@ -5,4 +5,5 @@ public class OrderPojo {
 	public float price;
 	public String status;
 	public String date;
+	public String userName;
 }

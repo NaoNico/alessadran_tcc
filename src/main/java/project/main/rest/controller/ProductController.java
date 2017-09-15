@@ -86,5 +86,11 @@ public class ProductController {
 		}
 		return new ResponseEntity<ArrayList<CategoriaPojo>>(categorias, HttpStatus.OK);
 	}
+	
+	@RequestMapping(path = "/products/", method = RequestMethod.GET)
+	@ResponseBody
+	ResponseEntity<?> products(){
+		return new ResponseEntity<Iterable<Product>>(repository.findAll(), HttpStatus.OK);
+	}
 }
 	
