@@ -50,15 +50,29 @@ public class UserController {
 	ResponseEntity<?> findUserByNameAndPasswordOrCreate(@RequestBody ObjectNode field) {
 		String username = field.get("username").asText();
 		String password = field.get("password").asText();
+		String name = field.get("name").asText();
 		User user = repository.findByUserAndPassword(username, password);
 		if (user == null) {
 			user = new User();
 			user.setUsername(username);
 			user.setPassword(password);
+			user.setName(name);
 			repository.save(user);
 			return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		} else {
 			return new ResponseEntity<User>(user, HttpStatus.OK);
+		}		
+	}
+	
+	@RequestMapping(path = "/login", method = RequestMethod.POST)
+	ResponseEntity<?> UserByNameAndPassword(@RequestBody ObjectNode field) {
+		String username = field.get("username").asText();
+		String password = field.get("password").asText();
+		User user = repository.findByUserAndPassword(username, password);
+		if (user == null) {
+			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+		} else {
+			return new ResponseEntity<User>(user, HttpStatus.OK);	
 		}		
 	}
 }

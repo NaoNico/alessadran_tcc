@@ -6,4 +6,5 @@ public class OrderPojo {
 	public String status;
 	public String date;
 	public String userName;
+	public String paymethod;
 }

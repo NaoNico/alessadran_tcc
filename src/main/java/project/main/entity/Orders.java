@@ -50,6 +50,10 @@ public class Orders implements Serializable {
 	@Column(name = "date")
 	@NotNull
 	private String date;
+		
+	@Column(name = "paymethod")
+	@NotNull
+	private String paymethod;
 	
 	public Integer getId() {
 		return id;
@@ -99,4 +103,11 @@ public class Orders implements Serializable {
 		this.date = date;
 	}
 
+	public String getPaymethod() {
+		return paymethod;
+	}
+
+	public void setPaymethod(String paymethod) {
+		this.paymethod = paymethod;
+	}
 }

@@ -20,6 +20,7 @@ CREATE TABLE `user` (
    `id` int NOT NULL AUTO_INCREMENT,
    `username` varchar(60) NOT NULL,
    `password` varchar(300) NOT NULL,
+   `name` varchar(200) NOT NULL,
    PRIMARY KEY (`id`)
 );
 
@@ -28,6 +29,7 @@ CREATE TABLE `orders` (
    `price` float NOT NULL,
    `user_id` int NOT NULL,
    `date` DATE NOT NULL,
+   `paymethod` varchar(100) NOT NULL,
    `status` varchar(20) NOT NULL,
    PRIMARY KEY (`id`),
    FOREIGN KEY (`user_id`) REFERENCES user(`id`)

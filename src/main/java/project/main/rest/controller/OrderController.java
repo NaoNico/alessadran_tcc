@@ -52,6 +52,7 @@ public class OrderController {
 		order.setPrice((float) field.get("price").asDouble());
 		order.setStatus(field.get("status").asText());
 		order.setDate(field.get("date").asText());
+		order.setPaymethod(field.get("paymethod").asText());
 		order.setUser(userRepository.findOne(field.get("user_id").asInt()));
 		order = orderRepository.save(order);
 		
@@ -80,6 +81,9 @@ public class OrderController {
 		}
 		if(field.has("status")){
 			order.setStatus(field.get("status").asText());
+			if (field.has("paymethod")){
+				order.setPaymethod(field.get("paymethod").asText());
+			}
 		}
 		
 		orderRepository.save(order);
@@ -98,6 +102,8 @@ public class OrderController {
 			orderPojo2.price = order.getPrice();
 			orderPojo2.status = order.getStatus();
 			orderPojo2.date = order.getDate();
+			orderPojo2.paymethod = order.getPaymethod();
+			orderPojo2.userName = order.getUser().getName();
 			orderPojo.add(orderPojo2);
 		}
 		return new ResponseEntity<ArrayList<OrderPojo>>(orderPojo, HttpStatus.OK);
@@ -129,7 +135,8 @@ public class OrderController {
 			orderPojo2.price = order.getPrice();
 			orderPojo2.status = order.getStatus();
 			orderPojo2.date = order.getDate();
-			orderPojo2.userName = order.getUser().getUsername();
+			orderPojo2.paymethod = order.getPaymethod();
+			orderPojo2.userName = order.getUser().getName();
 			orderPojo.add(orderPojo2);
 		}
 		return new ResponseEntity<ArrayList<OrderPojo>>(orderPojo, HttpStatus.OK);

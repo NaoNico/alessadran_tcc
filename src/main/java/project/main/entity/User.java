@@ -28,7 +28,11 @@ public class User implements Serializable{
 	@Column(name = "password")
 	@NotNull
 	private String password;
-
+	
+	@Column(name = "name")
+	@NotNull
+	private String name;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -52,6 +56,13 @@ public class User implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }

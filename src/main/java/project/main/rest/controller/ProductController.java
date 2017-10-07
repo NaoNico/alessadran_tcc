@@ -92,5 +92,17 @@ public class ProductController {
 	ResponseEntity<?> products(){
 		return new ResponseEntity<Iterable<Product>>(repository.findAll(), HttpStatus.OK);
 	}
+	
+	@RequestMapping(path = "/product/ativo", method = RequestMethod.GET)
+	@ResponseBody
+	ResponseEntity<?> productsAtivo(){
+		return new ResponseEntity<Product[]>(repository.productByStatus("Ativo"), HttpStatus.OK);
+	}
+	
+	@RequestMapping(path = "/product/inativo", method = RequestMethod.GET)
+	@ResponseBody
+	ResponseEntity<?> productsInativo(){
+		return new ResponseEntity<Product[]>(repository.productByStatus("Inativo"), HttpStatus.OK);
+	}
 }
 	
